@@ -19,19 +19,7 @@ public class MainActivity extends AppCompatActivity {
     EditText datito1, datito2, datito3;
     TextView textito;
 
-    public double[] ordenar(double[] arreglo) {
-        double apuntador;
-        for(int x = 0; x < arreglo.length; x++) {
-            for(int y = x+1; y < arreglo.length; y++) {
-                if(arreglo[x] > arreglo[y]) {
-                    apuntador = arreglo[x];
-                    arreglo[x] = arreglo[y];
-                    arreglo[y] = apuntador;
-                }
-            }
-        }
-        return arreglo;
-    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         double[] arreglito = new double[3];
         Button[] botoncitos = {guardar, mayor, menor, suma, promedio};
         EditText[] datitos = {datito1, datito2, datito3};
+        Clasesita objetito = new Clasesita();
 
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,28 +68,28 @@ public class MainActivity extends AppCompatActivity {
         mayor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "El mayor es " + ordenar(arreglito)[arreglito.length-1] , Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "El mayor es " + objetito.mayor(arreglito) , Toast.LENGTH_SHORT).show();
             }
         });
 
         menor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "El menor es " + ordenar(arreglito)[0], Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "El menor es " + objetito.menor(arreglito), Toast.LENGTH_SHORT).show();
             }
         });
 
         suma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "La suma es " + (arreglito[0] + arreglito[1] + arreglito[2]), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "La suma es " + objetito.suma(arreglito), Toast.LENGTH_SHORT).show();
             }
         });
 
         promedio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "El promedio es " + ((arreglito[0] + arreglito[1] + arreglito[2])/3), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "El promedio es " + objetito.promedio(arreglito), Toast.LENGTH_SHORT).show();
             }
         });
 
