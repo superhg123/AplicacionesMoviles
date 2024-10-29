@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class Adaptador extends BaseAdapter {
+public class    Adaptador extends BaseAdapter {
     Context contexto;
     String listadeportes[];
     String listacomentar[];
