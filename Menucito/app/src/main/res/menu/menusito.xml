@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/palomita"
+        android:title="paloma"
+        android:icon="@drawable/baseline_check_24"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/sumar"
+        android:title="suma"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/restar"
+        android:title="resta"
+        app:showAsAction="never"/>
+</menu>
