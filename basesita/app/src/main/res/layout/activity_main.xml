@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:enabled="false"
-        android:hint="Como voy a estudiar con ese codigo"
+        android:hint="Descripcion"
         android:id="@+id/eDescripcion"
         />
 
