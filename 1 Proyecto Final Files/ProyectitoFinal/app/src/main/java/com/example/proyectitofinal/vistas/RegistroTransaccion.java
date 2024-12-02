@@ -16,6 +16,8 @@ public class RegistroTransaccion extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_registro_transaccion, container, false);
+        View vista = inflater.inflate(R.layout.fragment_registro_transaccion, container, false);
+        
+        return vista;
     }
 }
