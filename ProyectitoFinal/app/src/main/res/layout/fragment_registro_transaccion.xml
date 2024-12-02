@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black"
+    tools:context=".vistas.RegistroTransaccion">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="15dp">
+        
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registrar Transacción"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Título"
+            app:hintTextColor="@color/white"
+            app:startIconDrawable="@drawable/fact_check"
+            app:boxBackgroundColor="@color/editBackground"
+            app:boxStrokeColor="@color/green"
+            app:cursorColor="@color/green"
+            app:helperText="Título de la transacción">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tituloRegistro"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Descripción"
+            app:boxBackgroundColor="@color/editBackground"
+            app:hintTextColor="@color/white"
+            app:boxStrokeColor="@color/green"
+            app:cursorColor="@color/green"
+            app:helperText="Descripción de la transacción"
+            app:startIconDrawable="@drawable/description"
+            android:layout_marginTop="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/descripcionRegistro"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/tipoTransaccion">
+            <RadioButton
+                android:id="@+id/tipoIngreso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="50dp"
+                app:buttonTint="@color/green"
+                android:text="Ingreso"
+                android:textColor="@color/white"
+                android:drawableStart="@drawable/dollar_sign"
+                android:drawablePadding="5dp"/>
+            <RadioButton
+                android:id="@+id/tipoGasto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                app:buttonTint="@color/green"
+                android:text="Gasto"
+                android:textColor="@color/white"
+                android:drawableStart="@drawable/gasto_icon"
+                android:drawablePadding="5dp"/>
+
+        </RadioGroup>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxBackgroundColor="@color/editBackground"
+            app:hintTextColor="@color/white"
+            app:boxStrokeColor="@color/green"
+            android:hint="Tipo"
+            app:helperText="Tipo de transacción"
+            app:startIconDrawable="@drawable/tipo_icon"
+            android:layout_marginTop="10dp"
+            style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu">
+
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:startIconDrawable="@drawable/money_bottom"
+            app:boxBackgroundColor="@color/editBackground"
+            app:boxStrokeColor="@color/green"
+            app:cursorColor="@color/green"
+            android:layout_marginTop="10dp"
+            android:hint="Monto"
+            app:hintTextColor="@color/white"
+            app:helperText="Monto de la transacción">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/montoRegistro"
+                android:inputType="number"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:backgroundTint="@color/green"
+            android:textColor="@color/white"
+            android:text="Registrar"
+            android:textStyle="bold"
+            android:id="@+id/registrarTransaccion"/>
+    </LinearLayout>
+
+</FrameLayout>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/mainLogin2">
+    <fragment
+        android:id="@+id/mainLogin2"
+        android:name="com.example.proyectitofinal.vistas.MainLogin"
+        android:label="fragment_main_login"
+        tools:layout="@layout/fragment_main_login" >
+        <action
+            android:id="@+id/action_mainLogin2_to_registrarse2"
+            app:destination="@id/registrarse" />
+        <action
+            android:id="@+id/action_mainLogin2_to_iniciarSesion22"
+            app:destination="@id/iniciarSesion2" />
+    </fragment>
+    <fragment
+        android:id="@+id/iniciarSesion2"
+        android:name="com.example.proyectitofinal.vistas.IniciarSesion"
+        android:label="fragment_iniciar_sesion"
+        tools:layout="@layout/fragment_iniciar_sesion" >
+        <action
+            android:id="@+id/action_iniciarSesion2_to_mainLogin2"
+            app:destination="@id/mainLogin2" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrarse"
+        android:name="com.example.proyectitofinal.vistas.Registrarse"
+        android:label="fragment_registrarse"
+        tools:layout="@layout/fragment_registrarse" >
+        <action
+            android:id="@+id/backToMainLogin2"
+            app:destination="@id/mainLogin2"
+            app:popUpTo="@id/mainLogin2"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_registroFinalizado"
+            app:destination="@id/iniciarSesion2" />
+    </fragment>
+</navigation>

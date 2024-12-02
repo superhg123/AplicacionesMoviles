@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bottom_principal"
+        android:title="Principal"
+        android:icon="@drawable/money"
+        android:enabled="true"/>
+    <item
+        android:id="@+id/bottom_registrar"
+        android:title="Registrar"
+        android:icon="@drawable/fact_check"
+        android:enabled="true"/>
+
+    <item
+        android:id="@+id/bottom_stats"
+        android:title="Estadístticas"
+        android:icon="@drawable/stats_icon"
+        android:enabled="true"/>
+</menu>

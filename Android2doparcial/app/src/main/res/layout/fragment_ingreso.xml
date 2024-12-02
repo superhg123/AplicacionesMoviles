@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Ingreso"
+    android:layout_margin="20dp">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Inserte el titulo"
+            android:id="@+id/insertTitulo"
+            android:layout_marginVertical="10dp"
+            android:inputType="text"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Inserte el subtitulo"
+            android:id="@+id/insertSub"
+            android:layout_marginVertical="10dp"
+            android:inputType="text"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Inserte el contenido"
+            android:id="@+id/insertCont"
+            android:layout_marginVertical="10dp"
+            android:inputType="text"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/colorSelect"
+            android:layout_marginTop="20dp"/>
+
+    </LinearLayout>
+
+
+
+</FrameLayout>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:gravity="bottom"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="30dp"
+    android:background="@color/green"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:src="@drawable/pfp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:text="Nombre (edad años)"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:id="@+id/nombreProfile"
+        android:gravity="center"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:text="Sexo"
+        android:textStyle="bold"
+        android:id="@+id/sexoProfile"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:text="Colonia/Delegacion"
+        android:drawableStart="@drawable/location"
+        android:id="@+id/locProfile"
+        android:layout_gravity="center"
+        android:drawablePadding="4dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:text="Idiomas: "
+        android:id="@+id/idiomasProfile"/>
+</LinearLayout>
