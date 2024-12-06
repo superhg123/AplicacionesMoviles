@@ -1,6 +1,7 @@
 package com.example.proyectitofinal.vistas;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
@@ -81,6 +82,26 @@ public class RegistroTransaccion extends Fragment {
                     valores.put("usuario", claveUsuario);
                     valores.put("transaccion", id);
                     db.insert("user_tracc", null, valores);
+                    SQLiteDatabase lecturaStats = admin.getReadableDatabase();
+                    Cursor cursor = lecturaStats.rawQuery("SELECT * FROM estadisticas WHERE id_usuario=" + claveUsuario, null);
+                    if(cursor.moveToFirst()) {
+                        ContentValues valoresStats = new ContentValues();
+                        float balance = cursor.getFloat(2);
+
+                        if(categoria.getCheckedRadioButtonId() == R.id.tipoIngreso) {
+                            float ganancias = cursor.getFloat(3);
+                            balance += ganancias;
+                            valoresStats.put("ingresos", ganancias);
+                        } else if (categoria.getCheckedRadioButtonId() == R.id.tipoGasto) {
+                            float gastos = cursor.getFloat(4);
+                            balance-= gastos;
+                            valoresStats.put("gastos", gastos);
+                        }
+
+                        valoresStats.put("monto", balance);
+
+                        db.update("estadisticas", valoresStats, "idUsuario=?", new String[]{claveUsuario});
+                    }
                 }
             }
         });

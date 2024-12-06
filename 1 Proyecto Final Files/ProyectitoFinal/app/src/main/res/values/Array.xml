@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="valores_iniciales_meta">
+        <item>0.0</item>
+        <item>1000.0</item>
+    </array>
+
+</resources>

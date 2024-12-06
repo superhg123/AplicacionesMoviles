@@ -76,8 +76,8 @@ public class App extends AppCompatActivity implements NavigationView.OnNavigatio
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         RegistroTransaccion.newInstance(claveUsuario)).commit();
             } else if (item.getItemId() == PAGINA_ESTADISTICAS) {
-                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                //        new Estadisticas()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new Estadisticas()).commit();
             }
             return true;
         });

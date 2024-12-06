@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.proyectitofinal.R;
 import com.example.proyectitofinal.clases.Transaccion;
@@ -46,9 +47,9 @@ public class TransaccionesAdapter extends BaseAdapter {
         TextView desc = vista.findViewById(R.id.descTransaccion);
         TextView monto = vista.findViewById(R.id.montoElemento);
 
-        titulo.setText(transacciones.get(i).getTitulo());
-        desc.setText(transacciones.get(i).getDescripcion());
-        monto.setText("$ " + transacciones.get(i).getMonto());
+        //titulo.setText(transacciones.get(i).getTitulo());
+        //desc.setText(transacciones.get(i).getDescripcion());
+        //monto.setText("$ " + transacciones.get(i).getMonto());
         return vista;
     }
 }

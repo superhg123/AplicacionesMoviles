@@ -16,6 +16,18 @@ public class Transaccion {
     private String tipo;
     private Float monto;
 
+    @Override
+    public String toString() {
+        return "Transaccion{" +
+                "id=" + id +
+                ", titulo='" + titulo + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", ingreso=" + ingreso +
+                ", tipo='" + tipo + '\'' +
+                ", monto=" + monto +
+                '}';
+    }
+
     public Transaccion(String titulo, String descripcion, Boolean ingreso, String tipo, Float monto) {
         this.titulo = titulo;
         this.descripcion = descripcion;
