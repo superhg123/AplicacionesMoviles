@@ -25,7 +25,7 @@ public class Basesita extends SQLiteOpenHelper {
                 "frances BOOLEAN)");
 
         sqLiteDatabase.execSQL("CREATE TABLE transaccion (\n" +
-                "id_transaccion INT PRIMARY KEY," +
+                "id_transaccion INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "titulo VARCHAR(100)," +
                 "descripcion VARCHAR(100)," +
                 "ingreso BOOLEAN," +
@@ -34,7 +34,7 @@ public class Basesita extends SQLiteOpenHelper {
                 ");");
 
         sqLiteDatabase.execSQL("CREATE TABLE estadisticas (" +
-                "id_estadistica INT PRIMARY KEY," +
+                "id_estadistica INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "id_usuario VARCHAR(20)," +
                 "monto FLOAT," +
                 "ingresos FLOAT," +
@@ -46,7 +46,7 @@ public class Basesita extends SQLiteOpenHelper {
                 ");");
 
         sqLiteDatabase.execSQL("CREATE TABLE user_tracc (\n" +
-                "id_user_tracc INT PRIMARY KEY," +
+                "id_user_tracc INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "usuario VARCHAR(20)," +
                 "transaccion INT," +
                 "FOREIGN KEY (usuario) REFERENCES usuario(clave)," +

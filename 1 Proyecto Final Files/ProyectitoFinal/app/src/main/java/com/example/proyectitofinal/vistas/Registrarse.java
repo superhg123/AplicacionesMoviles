@@ -65,30 +65,41 @@ public class Registrarse extends Fragment {
             @Override
             public void onClick(View view) {
                 try {
-                String clave = ((EditText)vista.findViewById(R.id.clave)).getText().toString();
-                String nombre = ((EditText)vista.findViewById(R.id.nombre)).getText().toString();
-                String edad = ((EditText)vista.findViewById(R.id.edad)).getText().toString();
-                String delegacion = ((Spinner)vista.findViewById(R.id.delegaciones)).getSelectedItem().toString();
-                String colonia = ((Spinner)vista.findViewById(R.id.colonias)).getSelectedItem().toString();
-                RadioButton seleccionado = vista.findViewById(((RadioGroup)vista.findViewById(R.id.sexo)).getCheckedRadioButtonId());
-                String sexo = seleccionado.getText().toString();
-                boolean ingles = ((CheckBox)vista.findViewById(R.id.ingles)).isChecked();
-                boolean frances = ((CheckBox)vista.findViewById(R.id.frances)).isChecked();
-                Basesita admin = new Basesita(getContext(), "admin", null, 1);
-                SQLiteDatabase sicuel = admin.getWritableDatabase();
-                ContentValues contenido = new ContentValues();
-                contenido.put("clave", clave);
-                contenido.put("nombre", nombre);
-                contenido.put("edad", edad);
-                contenido.put("sexo", sexo);
-                contenido.put("delegacion", delegacion);
-                contenido.put("colonia", colonia);
-                contenido.put("ingles", ingles);
-                contenido.put("frances", frances);
+                    String clave = ((EditText)vista.findViewById(R.id.clave)).getText().toString();
+                    String nombre = ((EditText)vista.findViewById(R.id.nombre)).getText().toString();
+                    String edad = ((EditText)vista.findViewById(R.id.edad)).getText().toString();
+                    String delegacion = ((Spinner)vista.findViewById(R.id.delegaciones)).getSelectedItem().toString();
+                    String colonia = ((Spinner)vista.findViewById(R.id.colonias)).getSelectedItem().toString();
+                    RadioButton seleccionado = vista.findViewById(((RadioGroup)vista.findViewById(R.id.sexo)).getCheckedRadioButtonId());
+                    String sexo = seleccionado.getText().toString();
+                    boolean ingles = ((CheckBox)vista.findViewById(R.id.ingles)).isChecked();
+                    boolean frances = ((CheckBox)vista.findViewById(R.id.frances)).isChecked();
+                    Basesita admin = new Basesita(getContext(), "admin", null, 1);
+                    SQLiteDatabase sicuel = admin.getWritableDatabase();
+                    ContentValues contenido = new ContentValues();
+                    contenido.put("clave", clave);
+                    contenido.put("nombre", nombre);
+                    contenido.put("edad", edad);
+                    contenido.put("sexo", sexo);
+                    contenido.put("delegacion", delegacion);
+                    contenido.put("colonia", colonia);
+                    contenido.put("ingles", ingles);
+                    contenido.put("frances", frances);
 
                     sicuel.insert("usuario", null, contenido);
                     sicuel.close();
                     findNavController(Registrarse.this).navigate(R.id.action_registroFinalizado);
+
+                    SQLiteDatabase stats = admin.getWritableDatabase();
+                    ContentValues contenidoStats = new ContentValues();
+                    contenidoStats.put("id_usuario", clave);
+                    contenidoStats.put("monto", 0.0f);
+                    contenidoStats.put("ingresos", 0.0f);
+                    contenidoStats.put("gastos", 0.0f);
+                    contenidoStats.put("limite", 0.0f);
+                    contenidoStats.put("meta", 0.0f);
+                    contenidoStats.put("diario", 0.0f);
+                    stats.insert("estadisticas", null, contenidoStats);
                 } catch (Exception e) {
                     Toast.makeText(getContext(), "Faltan campos por rellenar", Toast.LENGTH_SHORT).show();
                 }

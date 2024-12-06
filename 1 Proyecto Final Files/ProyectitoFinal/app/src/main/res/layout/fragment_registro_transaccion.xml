@@ -105,6 +105,7 @@
             <AutoCompleteTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/spinnerTipo"
                 android:inputType="none"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -119,6 +120,7 @@
             android:layout_marginTop="10dp"
             android:hint="Monto"
             app:hintTextColor="@color/white"
+            app:prefixText="$ "
             app:helperText="Monto de la transacción">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"

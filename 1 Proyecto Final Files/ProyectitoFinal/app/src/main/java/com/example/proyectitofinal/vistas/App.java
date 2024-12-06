@@ -2,9 +2,12 @@ package com.example.proyectitofinal.vistas;
 
 import static com.example.proyectitofinal.R.*;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -17,6 +20,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.proyectitofinal.R;
+import com.example.proyectitofinal.clases.Usuario;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -40,6 +44,18 @@ public class App extends AppCompatActivity implements NavigationView.OnNavigatio
         drawerLayout = findViewById(R.id.drawer_layout);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
+        View vista = navigationView.getHeaderView(0);
+        TextView nombre_edad = vista.findViewById(id.nombreProfile);
+        TextView sexo = vista.findViewById(id.sexoProfile);
+        TextView colonia_delegacion = vista.findViewById(id.locProfile);
+        Intent intent = getIntent();
+        String claveUsuario = intent.getStringExtra("Clave");
+
+
+        Usuario usuario = Usuario.recuperarDeBase(this, claveUsuario);
+        nombre_edad.setText(String.format("%s (%d años)", usuario.getNombre(), usuario.getEdad()));
+        sexo.setText(usuario.getSexo());
+        colonia_delegacion.setText(String.format("%s/%s", usuario.getDelegacion(), usuario.getColonia()));
         navigationView.setNavigationItemSelectedListener(this);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
@@ -49,16 +65,16 @@ public class App extends AppCompatActivity implements NavigationView.OnNavigatio
 
         if(savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new MainPage()).commit();
+                    MainPage.newInstance(claveUsuario)).commit();
         }
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             if (item.getItemId() == PAGINA_PRINCIPAL) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new MainPage()).commit();
+                        MainPage.newInstance(claveUsuario)).commit();
             } else if (item.getItemId() == PAGINA_REGISTRO) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new RegistroTransaccion()).commit();
+                        RegistroTransaccion.newInstance(claveUsuario)).commit();
             } else if (item.getItemId() == PAGINA_ESTADISTICAS) {
                 //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 //        new Estadisticas()).commit();

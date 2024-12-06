@@ -58,6 +58,7 @@ public class IniciarSesion extends Fragment {
                     Cursor cursor = sicuel.rawQuery("SELECT * FROM usuario WHERE clave = " + clave, null);
                     if(cursor.moveToFirst()) {
                         Intent intentito = new Intent(getContext(), App.class);
+                        intentito.putExtra("Clave", clave);
                         startActivity(intentito);
                     } else {
                         throw new Exception();
