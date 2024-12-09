@@ -88,9 +88,10 @@ public class Registrarse extends Fragment {
 
                     sicuel.insert("usuario", null, contenido);
                     sicuel.close();
-                    findNavController(Registrarse.this).navigate(R.id.action_registroFinalizado);
 
-                    SQLiteDatabase stats = admin.getWritableDatabase();
+                    Basesita admin2 = new Basesita(getContext(), "admin", null, 1);
+                    SQLiteDatabase basesita2 = admin2.getWritableDatabase();
+
                     ContentValues contenidoStats = new ContentValues();
                     contenidoStats.put("id_usuario", clave);
                     contenidoStats.put("monto", 0.0f);
@@ -98,8 +99,11 @@ public class Registrarse extends Fragment {
                     contenidoStats.put("gastos", 0.0f);
                     contenidoStats.put("limite", 0.0f);
                     contenidoStats.put("meta", 0.0f);
-                    contenidoStats.put("diario", 0.0f);
-                    stats.insert("estadisticas", null, contenidoStats);
+                    contenidoStats.put("limiteDiario", 0.0f);
+                    basesita2.insert("estadisticas", null, contenidoStats);
+                    basesita2.close();
+
+                    findNavController(Registrarse.this).navigate(R.id.action_registroFinalizado);
                 } catch (Exception e) {
                     Toast.makeText(getContext(), "Faltan campos por rellenar", Toast.LENGTH_SHORT).show();
                 }

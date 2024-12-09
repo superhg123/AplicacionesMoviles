@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -20,9 +21,13 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.proyectitofinal.R;
+import com.example.proyectitofinal.adaptadores.OpcionesAdapter;
+import com.example.proyectitofinal.clases.Opcion;
 import com.example.proyectitofinal.clases.Transaccion;
 import com.example.proyectitofinal.modelo.Basesita;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
+
+import java.util.ArrayList;
 
 public class RegistroTransaccion extends Fragment {
 
@@ -49,9 +54,49 @@ public class RegistroTransaccion extends Fragment {
 
         String claveUsuario = getArguments().getString("Usuario");
 
-        String[] opciones = {"Comida", "Trabajo", "Transporte"};
-        ArrayAdapter adaptador = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_dropdown_item, opciones);
-        spinner.setAdapter(adaptador);
+        categoria.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                ArrayList<Opcion> opciones = new ArrayList<>();
+                if(radioGroup.getCheckedRadioButtonId() == R.id.tipoGasto) {
+
+                    opciones.add(new Opcion("Vivienda", R.drawable.vivienda_icon));
+                    opciones.add(new Opcion("Comida", R.drawable.comida_icon));
+                    opciones.add(new Opcion("Transporte", R.drawable.transporte_icon));
+                    opciones.add(new Opcion("Salud", R.drawable.salud_icon));
+                    opciones.add(new Opcion("Entretenimiento", R.drawable.entretenimiento_icon));
+                    opciones.add(new Opcion("Ropa y accesorios", R.drawable.ropa_icon));
+                    opciones.add(new Opcion("Deuda", R.drawable.deuda_icon));
+                    opciones.add(new Opcion("Educacion", R.drawable.educacion_icon));
+                    opciones.add(new Opcion("Oscio", R.drawable.oscio_icon));
+
+
+                } else if (radioGroup.getCheckedRadioButtonId() == R.id.tipoIngreso) {
+
+                    opciones.add(new Opcion("Salario", R.drawable.money));
+                    opciones.add(new Opcion("Beca", R.drawable.beca_icon));
+                    opciones.add(new Opcion("Ingreso pasivo", R.drawable.pasivo_icon));
+                    opciones.add(new Opcion("Ganancias", R.drawable.ganancia_icon));
+                    opciones.add(new Opcion("Subsidio", R.drawable.subsidio_icon));
+                    opciones.add(new Opcion("Regalo", R.drawable.regalo_icon));
+                    opciones.add(new Opcion("Premio", R.drawable.premio_icon));
+                    opciones.add(new Opcion("Venta", R.drawable.venta_icon));
+
+                }
+
+                opciones.add(new Opcion("Otros", R.drawable.otros_icon));
+
+                ArrayList<String> strings = new ArrayList<>();
+                for(Opcion x : opciones) {
+                    strings.add(x.getValor());
+                }
+
+                opciones.add(new Opcion("Otros", R.drawable.otros_icon));
+                OpcionesAdapter adaptador = new OpcionesAdapter(getContext(), R.layout.opciones_adapter, opciones, strings);
+                spinner.setAdapter(adaptador);
+            }
+        });
+
 
         mandarRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,25 +127,31 @@ public class RegistroTransaccion extends Fragment {
                     valores.put("usuario", claveUsuario);
                     valores.put("transaccion", id);
                     db.insert("user_tracc", null, valores);
-                    SQLiteDatabase lecturaStats = admin.getReadableDatabase();
+                    db.close();
+
+                    Basesita admin2 = new Basesita(getContext(), "admin", null, 1);
+                    SQLiteDatabase lecturaStats = admin2.getReadableDatabase();
                     Cursor cursor = lecturaStats.rawQuery("SELECT * FROM estadisticas WHERE id_usuario=" + claveUsuario, null);
                     if(cursor.moveToFirst()) {
                         ContentValues valoresStats = new ContentValues();
                         float balance = cursor.getFloat(2);
 
+                        float montoTrac = Float.parseFloat(monto.getText().toString());
                         if(categoria.getCheckedRadioButtonId() == R.id.tipoIngreso) {
                             float ganancias = cursor.getFloat(3);
-                            balance += ganancias;
+                            ganancias += montoTrac;
+                            balance += montoTrac;
                             valoresStats.put("ingresos", ganancias);
                         } else if (categoria.getCheckedRadioButtonId() == R.id.tipoGasto) {
                             float gastos = cursor.getFloat(4);
-                            balance-= gastos;
+                            gastos += montoTrac;
+                            balance-= montoTrac;
                             valoresStats.put("gastos", gastos);
                         }
 
                         valoresStats.put("monto", balance);
-
-                        db.update("estadisticas", valoresStats, "idUsuario=?", new String[]{claveUsuario});
+                        SQLiteDatabase escrituraStats = admin2.getWritableDatabase();
+                        escrituraStats.update("estadisticas", valoresStats, "id_usuario=?", new String[]{claveUsuario});
                     }
                 }
             }

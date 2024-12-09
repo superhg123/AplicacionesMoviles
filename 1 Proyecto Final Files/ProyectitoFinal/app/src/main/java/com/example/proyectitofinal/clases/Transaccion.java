@@ -15,6 +15,7 @@ public class Transaccion {
     private Boolean ingreso;
     private String tipo;
     private Float monto;
+    private String fecha;
 
     @Override
     public String toString() {
@@ -36,13 +37,14 @@ public class Transaccion {
         this.monto = monto;
     }
 
-    public Transaccion(int id, String titulo, String descripcion, Boolean ingreso, String tipo, Float monto) {
+    public Transaccion(int id, String titulo, String descripcion, Boolean ingreso, String tipo, Float monto, String fecha) {
         this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.ingreso = ingreso;
         this.tipo = tipo;
         this.monto = monto;
+        this.fecha = fecha;
     }
 
     public Long guardarEnBase(Context context) {
@@ -54,10 +56,10 @@ public class Transaccion {
         contenido.put("ingreso", this.ingreso);
         contenido.put("tipo", this.tipo);
         contenido.put("monto", this.monto);
-        Toast.makeText(context, contenido.toString(), Toast.LENGTH_SHORT).show();
         db.insert("transaccion", null, contenido);
         Cursor idCursor = db.rawQuery("SELECT max(id_transaccion) FROM transaccion", null);
         idCursor.moveToFirst();
+        db.close();
         return idCursor.getLong(0);
     }
 
@@ -72,9 +74,17 @@ public class Transaccion {
                     cursor.getString(2),
                     (cursor.getInt(3) == 1),
                     cursor.getString(4),
-                    cursor.getFloat(5)
+                    cursor.getFloat(5),
+                    cursor.getString(6)
             );
         } else return null;
+    }
+
+    public void eliminarDeBase(Context context) {
+        Basesita admin = new Basesita(context, "admin", null, 1);
+        SQLiteDatabase db = admin.getWritableDatabase();
+        db.delete("user_tracc", "transaccion=?", new String[]{this.id + ""});
+        db.delete("transaccion", "id_transaccion=?", new String[]{this.id + ""});
     }
 
     public int getId() {
@@ -123,5 +133,13 @@ public class Transaccion {
 
     public void setMonto(Float monto) {
         this.monto = monto;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 }

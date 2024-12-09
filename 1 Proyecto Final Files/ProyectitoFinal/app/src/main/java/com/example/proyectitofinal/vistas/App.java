@@ -4,10 +4,13 @@ import static com.example.proyectitofinal.R.*;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -21,8 +24,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.proyectitofinal.R;
 import com.example.proyectitofinal.clases.Usuario;
+import com.example.proyectitofinal.modelo.Basesita;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
 
 public class App extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -77,9 +83,36 @@ public class App extends AppCompatActivity implements NavigationView.OnNavigatio
                         RegistroTransaccion.newInstance(claveUsuario)).commit();
             } else if (item.getItemId() == PAGINA_ESTADISTICAS) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new Estadisticas()).commit();
+                        Estadisticas.newInstance(claveUsuario)).commit();
             }
             return true;
+        });
+
+        NavigationView sideMenu = findViewById(R.id.nav_view);
+
+        sideMenu.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if(item.getItemId() == id.userSettings) {
+                    Basesita admin = new Basesita(App.this, "admin", null, 1);
+                    SQLiteDatabase reader = admin.getReadableDatabase();
+                    Cursor cursor = reader.rawQuery("SELECT transaccion FROM user_tracc WHERE usuario=?", new String[]{claveUsuario});
+                    ArrayList<String> ids = new ArrayList<>();
+                    while(cursor.moveToNext()) {
+                        ids.add(cursor.getString(0));
+                    }
+                    SQLiteDatabase deleter = admin.getWritableDatabase();
+                    deleter.delete("user_tracc", "usuario=?", new String[]{claveUsuario});
+                    for(String x : ids) {
+                        deleter.delete("transaccion", "id_transaccion=?", new String[]{x});
+                    }
+                    deleter.delete("estadisticas", "id_usuario=?", new String[]{claveUsuario});
+                    deleter.delete("usuario", "clave=?", new String[]{claveUsuario});
+                    Toast.makeText(getApplicationContext(), "Datos eliminados exitosamente", Toast.LENGTH_SHORT).show();
+                }
+                finish();
+                return false;
+            }
         });
 
     }

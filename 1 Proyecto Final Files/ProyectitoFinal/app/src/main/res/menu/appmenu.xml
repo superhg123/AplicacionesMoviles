@@ -6,17 +6,17 @@
     <group
         android:checkableBehavior="single">
 
-        <item android:id="@+id/mainPageSide"
-            android:title="Principal"/>
 
         <item android:id="@+id/userSettings"
-            android:title="Ajustes de usuario"/>
+            android:icon="@drawable/delete_icon"
+            android:title="Reiniciar datos"/>
     </group>
 
     <item android:title="">
         <menu>
             <item
                 android:id="@+id/logout"
+                android:icon="@drawable/salida_icon"
                 android:title="Cerrar sesión"/>
         </menu>
     </item>

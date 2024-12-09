@@ -32,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
+                    android:id="@+id/montoStats"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="30sp"
@@ -53,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:valueFrom="0.0"
                     android:valueTo="10000.0"
-                    android:stepSize="1000.0"
+                    android:stepSize="100.0"
                     app:trackColorActive="@color/green"
                     app:trackColorInactive="@color/placeholder"
                     app:tickColor="@color/white"
@@ -78,7 +79,7 @@
                     android:layout_height="match_parent"
                     android:textColor="@color/white"
                     android:textSize="18sp"
-                    android:text="Limites de Hoy"/>
+                    android:text="Limites"/>
 
 
                 <com.google.android.material.progressindicator.LinearProgressIndicator
@@ -90,14 +91,26 @@
                     app:indicatorColor="@color/green"
                     android:id="@+id/progresoMeta"/>
                 <TextView
+                    android:id="@+id/leyendavsStats"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:text="$125 de $2000"
                     android:layout_marginTop="10dp"/>
+
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+        <Button
+            android:id="@+id/enviar_stats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/green"
+            android:textStyle="bold"
+            android:text="Enviar"/>
     </LinearLayout>
 
 </FrameLayout>

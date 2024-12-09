@@ -30,7 +30,8 @@ public class Basesita extends SQLiteOpenHelper {
                 "descripcion VARCHAR(100)," +
                 "ingreso BOOLEAN," +
                 "tipo VARCHAR(50)," +
-                "monto FLOAT" +
+                "monto FLOAT," +
+                "fecha TEXT DEFAULT (date('now'))" +
                 ");");
 
         sqLiteDatabase.execSQL("CREATE TABLE estadisticas (" +
